@@ -1,3 +1,7 @@
+package iec61850.nodes.gui;
+
+import iec61850.nodes.common.LN;
+import iec61850.objects.samples.Attribute;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.NumberAxis;

@@ -1,3 +1,7 @@
+package iec61850.nodes.gui;
+
+import iec61850.objects.samples.Attribute;
+
 /**
  * @author Александр Холодов
  * @created 01.2021

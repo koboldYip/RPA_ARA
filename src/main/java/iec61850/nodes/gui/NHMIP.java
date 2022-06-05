@@ -1,3 +1,6 @@
+package iec61850.nodes.gui;
+
+import iec61850.nodes.common.LN;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;

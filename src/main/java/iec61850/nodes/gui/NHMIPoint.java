@@ -1,4 +1,4 @@
-/**
+package iec61850.nodes.gui; /**
  * @author Александр Холодов
  * @created 01.2021
  * @project RPA-MPEI
