@@ -44,8 +44,8 @@ public class CHAPV extends LN {
                 timeC = 0;
             }
 
-            if ((timeA > timeSetPointCHAPV.getValue() * 50 * samplingFrequency) ||
-                    (timeB > timeSetPointCHAPV.getValue() * 50 * samplingFrequency) ||
+            if ((timeA > timeSetPointCHAPV.getValue() * 50 * samplingFrequency) &&
+                    (timeB > timeSetPointCHAPV.getValue() * 50 * samplingFrequency) &&
                     (timeC > timeSetPointCHAPV.getValue() * 50 * samplingFrequency)) {
                 stepCHAPV.setValue(true);
             }
