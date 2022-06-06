@@ -4,6 +4,8 @@ import iec61850.nodes.common.LN;
 import iec61850.objects.samples.Attribute;
 import lombok.Data;
 
+import java.net.DatagramPacket;
+
 @Data
 public class ACHR extends LN {
 
@@ -17,7 +19,11 @@ public class ACHR extends LN {
     private int timeA_ACHR = 0;
     private int timeB_ACHR = 0;
     private int timeC_ACHR = 0;
+
+    private int port;
+
     private Attribute<Boolean> stepACHR = new Attribute<>(false);
+    private Attribute<Boolean> stepCHAPV = new Attribute<>(false);
 
     private Attribute<Float> lastFrequencyA = new Attribute<>(50f);
     private Attribute<Float> lastFrequencyB = new Attribute<>(50f);
@@ -53,10 +59,10 @@ public class ACHR extends LN {
             stepACHR.setValue(true);
         }
 
-        if ((samplingFrequency.getValue() * 50) == 1.0){
+        if ((samplingFrequency.getValue() * 50) == 1.0) {
             if ((Math.abs((lastFrequencyA.getValue() - frequencyA.getValue())) >= 1) ||
                     (Math.abs((lastFrequencyB.getValue() - frequencyB.getValue())) >= 1) ||
-                    (Math.abs((lastFrequencyC.getValue() - frequencyC.getValue())) >= 1)){
+                    (Math.abs((lastFrequencyC.getValue() - frequencyC.getValue())) >= 1)) {
                 stepACHR.setValue(false);
             }
             lastFrequencyA = frequencyA;
@@ -64,6 +70,9 @@ public class ACHR extends LN {
             lastFrequencyC = frequencyC;
             time_ACHR = 0;
         }
+
+        if (stepCHAPV.getValue()) stepACHR.setValue(false);
+
 
         time_ACHR++;
     }

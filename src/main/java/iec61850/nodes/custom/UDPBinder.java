@@ -1,13 +1,18 @@
 package iec61850.nodes.custom;
 
+import iec61850.nodes.algo.ACHR;
 import iec61850.nodes.common.LN;
+import iec61850.objects.samples.Attribute;
 import lombok.Data;
 import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Data
@@ -15,16 +20,11 @@ public class UDPBinder extends LN {
 
     private DatagramSocket udp;
 
-    private int senderPortOne = 9001;
-    private int senderPortTwo = 9002;
-    private int senderPortThree = 9003;
-    private int senderPortFour = 9004;
-    private int senderPortFive = 9005;
-    private int senderPortSix = 9006;
-    private int senderPortSeven = 9007;
-    private int senderPortEight = 9008;
-    private int senderPortNine = 9009;
-    private int senderPortTen = 9010;
+
+    private Attribute<Float> freqA = new Attribute<>(0f);
+    private Attribute<Float> freqB = new Attribute<>(0f);
+    private Attribute<Float> freqC = new Attribute<>(0f);
+
 
     private double Ua = 0.0;
     private double Ub = 0.0;
@@ -57,6 +57,8 @@ public class UDPBinder extends LN {
 
     private InetAddress senderAddress;
 
+    private List<ACHR> achrs = new ArrayList<>();
+
     private int halfPeriodA;
     private int halfPeriodB;
     private int halfPeriodC;
@@ -69,19 +71,16 @@ public class UDPBinder extends LN {
     private int flagB;
     private int flagC;
 
-    private double lastValueA;
-    private double lastValueB;
-    private double lastValueC;
+    private Attribute<Double> lastValueA = new Attribute<>(0d);
+    private Attribute<Double> lastValueB = new Attribute<>(0d);
+    private Attribute<Double> lastValueC = new Attribute<>(0d);
 
-    public double frequencyA = 0.0;
-    public double frequencyB = 0.0;
-    public double frequencyC = 0.0;
 
     public int frequency = 50;
 
     public int samplingFrequency = 80;
 
-    private double frequencyThreePhase;
+    private Attribute<Float> frequencyThreePhase = new Attribute<>(0f);
 
     private int point;
 
@@ -119,50 +118,50 @@ public class UDPBinder extends LN {
         Uac = phsUac.getDouble();
         Ubc = phsUbc.getDouble();
 
-        if ((lastValueA * Ua) < 0) {
+        if ((lastValueA.getValue() * Ua) < 0) {
             if (flagA != 2) {
                 periodA += halfPeriodA;
                 halfPeriodA = 0;
                 flagA += 1;
             }
             if (flagA == 2) {
-                frequencyA = (float) periodA / samplingFrequency * 50;
+                freqA.setValue((float) (periodA / samplingFrequency * 50));
                 periodA = 0;
                 flagA = 0;
             }
         }
         /*Фаза В*/
-        if ((lastValueB * Ub) < 0) {
+        if ((lastValueB.getValue() * Ub) < 0) {
             if (flagB != 2) {
                 periodB += halfPeriodB;
                 halfPeriodB = 0;
                 flagB += 1;
             }
             if (flagB == 2) {
-                frequencyB = (float) periodB / samplingFrequency * 50;
+                freqB.setValue((float) (periodB / samplingFrequency * 50));
                 periodB = 0;
                 flagB = 0;
             }
         }
         /*Фаза С*/
-        if ((lastValueC * Uc) < 0) {
+        if ((lastValueC.getValue() * Uc) < 0) {
             if (flagC != 2) {
                 periodC += halfPeriodC;
                 halfPeriodC = 0;
                 flagC += 1;
             }
             if (flagC == 2) {
-                frequencyC = (float) periodC / samplingFrequency * 50;
+                freqC.setValue((float) periodC / samplingFrequency * 50);
                 periodC = 0;
                 flagC = 0;
             }
         }
 
-        frequencyThreePhase = (frequencyA + frequencyB + frequencyC) / 3;
+        frequencyThreePhase.setValue((freqA.getValue() + freqB.getValue() + freqC.getValue()) / 3);
 
-        lastValueA = Ua;
-        lastValueB = Ub;
-        lastValueC = Uc;
+        lastValueA.setValue(Ua);
+        lastValueB.setValue(Ub);
+        lastValueC.setValue(Uc);
 
         halfPeriodA++;
         halfPeriodB++;
@@ -170,4 +169,28 @@ public class UDPBinder extends LN {
 
         point++;
     }
+
+
+    public void sending() {
+        achrs.stream().filter(achr -> achr.getStepACHR().getValue()).forEach(achr -> {
+            try {
+                udp.send(new DatagramPacket(
+                        sendingDataBufferNull, sendingDataBufferNull.length,
+                        senderAddress, achr.getPort()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        achrs.stream().filter(achr -> !achr.getStepACHR().getValue()).forEach(achr -> {
+            try {
+                udp.send(new DatagramPacket(
+                        sendingDataBufferOne, sendingDataBufferOne.length,
+                        senderAddress, achr.getPort()));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
 }

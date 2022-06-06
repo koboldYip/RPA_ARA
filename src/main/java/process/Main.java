@@ -2,18 +2,12 @@ package process;
 
 import iec61850.nodes.algo.ACHR;
 import iec61850.nodes.algo.CHAPV;
+import iec61850.nodes.custom.UDPBinder;
 import iec61850.nodes.gui.NHMI;
 import iec61850.nodes.gui.NHMISignal;
-import iec61850.objects.samples.Attribute;
-
-import java.net.DatagramPacket;
 
 
 public class Main {
-
-    private static Attribute<Float> freqA = new Attribute<>(0f);
-    private static Attribute<Float> freqB = new Attribute<>(0f);
-    private static Attribute<Float> freqC = new Attribute<>(0f);
 
 
     public static int modellingTime = 30;
@@ -25,6 +19,8 @@ public class Main {
     public static int iteration = 0;
 
     public static void main(String[] args) {
+
+        UDPBinder udpBinder = new UDPBinder();
 
         ACHR achr1 = new ACHR();
         ACHR achr2 = new ACHR();
@@ -56,235 +52,152 @@ public class Main {
         CHAPV chapv12 = new CHAPV();
         CHAPV chapv13 = new CHAPV();
 
+        achr1.setFrequencyA(udpBinder.getFreqA());
+        achr1.setFrequencyB(udpBinder.getFreqB());
+        achr1.setFrequencyC(udpBinder.getFreqC());
+
+        achr2.setFrequencyA(udpBinder.getFreqA());
+        achr2.setFrequencyB(udpBinder.getFreqB());
+        achr2.setFrequencyC(udpBinder.getFreqC());
+
+        achr3.setFrequencyA(udpBinder.getFreqA());
+        achr3.setFrequencyB(udpBinder.getFreqB());
+        achr3.setFrequencyC(udpBinder.getFreqC());
+
+        achr4.setFrequencyA(udpBinder.getFreqA());
+        achr4.setFrequencyB(udpBinder.getFreqB());
+        achr4.setFrequencyC(udpBinder.getFreqC());
+
+        achr5.setFrequencyA(udpBinder.getFreqA());
+        achr5.setFrequencyB(udpBinder.getFreqB());
+        achr5.setFrequencyC(udpBinder.getFreqC());
+
+        achr6.setFrequencyA(udpBinder.getFreqA());
+        achr6.setFrequencyB(udpBinder.getFreqB());
+        achr6.setFrequencyC(udpBinder.getFreqC());
+
+        achr7.setFrequencyA(udpBinder.getFreqA());
+        achr7.setFrequencyB(udpBinder.getFreqB());
+        achr7.setFrequencyC(udpBinder.getFreqC());
+
+        achr8.setFrequencyA(udpBinder.getFreqA());
+        achr8.setFrequencyB(udpBinder.getFreqB());
+        achr8.setFrequencyC(udpBinder.getFreqC());
+
+        achr9.setFrequencyA(udpBinder.getFreqA());
+        achr9.setFrequencyB(udpBinder.getFreqB());
+        achr9.setFrequencyC(udpBinder.getFreqC());
+
+        achr10.setFrequencyA(udpBinder.getFreqA());
+        achr10.setFrequencyB(udpBinder.getFreqB());
+        achr10.setFrequencyC(udpBinder.getFreqC());
+
+        achr11.setFrequencyA(udpBinder.getFreqA());
+        achr11.setFrequencyB(udpBinder.getFreqB());
+        achr11.setFrequencyC(udpBinder.getFreqC());
+
+        achr12.setFrequencyA(udpBinder.getFreqA());
+        achr12.setFrequencyB(udpBinder.getFreqB());
+        achr12.setFrequencyC(udpBinder.getFreqC());
+
+        achr1.setStepCHAPV(chapv1.getStepCHAPV());
+        chapv1.setStepACHR(achr1.getStepACHR());
+
+        achr2.setStepCHAPV(chapv2.getStepCHAPV());
+        chapv2.setStepACHR(achr2.getStepACHR());
+
+        achr3.setStepCHAPV(chapv3.getStepCHAPV());
+        chapv3.setStepACHR(achr3.getStepACHR());
+
+        achr4.setStepCHAPV(chapv4.getStepCHAPV());
+        chapv4.setStepACHR(achr4.getStepACHR());
+
+        achr5.setStepCHAPV(chapv5.getStepCHAPV());
+        chapv5.setStepACHR(achr5.getStepACHR());
+
+        achr6.setStepCHAPV(chapv6.getStepCHAPV());
+        chapv6.setStepACHR(achr6.getStepACHR());
+
+        achr7.setStepCHAPV(chapv7.getStepCHAPV());
+        chapv7.setStepACHR(achr7.getStepACHR());
+
+        achr8.setStepCHAPV(chapv8.getStepCHAPV());
+        chapv8.setStepACHR(achr8.getStepACHR());
+
+        achr9.setStepCHAPV(chapv9.getStepCHAPV());
+        chapv9.setStepACHR(achr9.getStepACHR());
+
+        achr10.setStepCHAPV(chapv10.getStepCHAPV());
+        chapv10.setStepACHR(achr10.getStepACHR());
+
+        achr11.setStepCHAPV(chapv11.getStepCHAPV());
+        chapv11.setStepACHR(achr11.getStepACHR());
+
+        achr12.setStepCHAPV(chapv12.getStepCHAPV());
+        chapv12.setStepACHR(achr12.getStepACHR());
+
+        udpBinder.getAchrs().add(achr1);
+        udpBinder.getAchrs().add(achr2);
+        udpBinder.getAchrs().add(achr3);
+        udpBinder.getAchrs().add(achr4);
+        udpBinder.getAchrs().add(achr5);
+        udpBinder.getAchrs().add(achr6);
+        udpBinder.getAchrs().add(achr7);
+        udpBinder.getAchrs().add(achr8);
+        udpBinder.getAchrs().add(achr9);
+        udpBinder.getAchrs().add(achr10);
+        udpBinder.getAchrs().add(achr11);
+        udpBinder.getAchrs().add(achr12);
+
+        achr1.setPort(9001);
+        achr2.setPort(9002);
+        achr3.setPort(9003);
+        achr4.setPort(9004);
+        achr5.setPort(9005);
+        achr6.setPort(9006);
+        achr7.setPort(9007);
+        achr8.setPort(9008);
+        achr9.setPort(9009);
+        achr10.setPort(9010);
+        achr11.setPort(9011);
+        achr12.setPort(9012);
+        achr13.setPort(9013);
 
         nhmi.addSignals(
-                new NHMISignal("FreqA", freqA),
-                new NHMISignal("FreqB", freqB),
-                new NHMISignal("FreqC", freqC)
+                new NHMISignal("FreqA", udpBinder.getFreqA()),
+                new NHMISignal("FreqB", udpBinder.getFreqB()),
+                new NHMISignal("FreqC", udpBinder.getFreqC())
         );
 
         while (iteration < (modellingTime * frequency * samplingFrequency - 1)) {
-            try {
-
-                achr1.process();
-                achr2.process();
-                achr3.process();
-                achr4.process();
-                achr5.process();
-                achr6.process();
-                achr7.process();
-                achr8.process();
-                achr9.process();
-                achr10.process();
-                achr11.process();
-                achr12.process();
-                achr13.process();
-
-                chapv1.process();
-                chapv2.process();
-                chapv3.process();
-                chapv4.process();
-                chapv5.process();
-                chapv6.process();
-                chapv7.process();
-                chapv8.process();
-                chapv9.process();
-                chapv10.process();
-                chapv11.process();
-                chapv12.process();
-                chapv13.process();
-
-                if (chapv1.getStepCHAPV().getValue()) {
-                    achr1.getStepACHR().setValue(false);
-                }
-                if (chapv2.getStepCHAPV().getValue()) {
-                    achr2.getStepACHR().setValue(false);
-                }
-                if (chapv3.getStepCHAPV().getValue()) {
-                    achr3.getStepACHR().setValue(false);
-                }
-                if (chapv4.getStepCHAPV().getValue()) {
-                    achr4.getStepACHR().setValue(false);
-                }
-                if (chapv5.getStepCHAPV().getValue()) {
-                    achr5.getStepACHR().setValue(false);
-                }
-                if (chapv6.getStepCHAPV().getValue()) {
-                    achr6.getStepACHR().setValue(false);
-                }
-                if (chapv7.getStepCHAPV().getValue()) {
-                    achr7.getStepACHR().setValue(false);
-                }
-                if (chapv8.getStepCHAPV().getValue()) {
-                    achr8.getStepACHR().setValue(false);
-                }
-                if (chapv9.getStepCHAPV().getValue()) {
-                    achr9.getStepACHR().setValue(false);
-                }
-                if (chapv10.getStepCHAPV().getValue()) {
-                    achr10.getStepACHR().setValue(false);
-                }
-                if (chapv11.getStepCHAPV().getValue()) {
-                    achr1.getStepACHR().setValue(false);
-                }
-                if (chapv12.getStepCHAPV().getValue()) {
-                    achr1.getStepACHR().setValue(false);
-                }
-                if (chapv13.getStepCHAPV().getValue()) {
-                    achr1.getStepACHR().setValue(false);
-                }
-
-                if (achr1.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketOne = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortOne);
-                    udp.send(outputPacketOne);
-                } else {
-                    DatagramPacket outputPacketOne = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortOne);
-                    udp.send(outputPacketOne);
-                }
-                if (achr2.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketTwo = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortTwo);
-                    udp.send(outputPacketTwo);
-                } else {
-                    DatagramPacket outputPacketTwo = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortTwo);
-                    udp.send(outputPacketTwo);
-                }
-                if (achr3.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketThree = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortThree);
-                    udp.send(outputPacketThree);
-                } else {
-                    DatagramPacket outputPacketThree = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortThree);
-                    udp.send(outputPacketThree);
-                }
-                if (achr4.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketFour = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortFour);
-                    udp.send(outputPacketFour);
-                } else {
-                    DatagramPacket outputPacketFour = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortFour);
-                    udp.send(outputPacketFour);
-                }
-                if (achr5.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketFive = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortFive);
-                    udp.send(outputPacketFive);
-                } else {
-                    DatagramPacket outputPacketFive = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortFive);
-                    udp.send(outputPacketFive);
-                }
-                if (achr6.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketSix = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortSeven);
-                    udp.send(outputPacketSix);
-                } else {
-                    DatagramPacket outputPacketSix = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortSeven);
-                    udp.send(outputPacketSix);
-                }
-                if (achr7.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketSeven = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortSix);
-                    udp.send(outputPacketSeven);
-                } else {
-                    DatagramPacket outputPacketSeven = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortSix);
-                    udp.send(outputPacketSeven);
-                }
-                if (achr8.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketEight = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortEight);
-                    udp.send(outputPacketEight);
-                } else {
-                    DatagramPacket outputPacketEight = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortEight);
-                    udp.send(outputPacketEight);
-                }
-                if (achr9.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketNine = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortNine);
-                    udp.send(outputPacketNine);
-                } else {
-                    DatagramPacket outputPacketNine = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortNine);
-                    udp.send(outputPacketNine);
-                }
-                if (achr10.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                } else {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                }
-                if (achr11.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                } else {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                }
-                if (achr12.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                } else {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                }
-                if (achr13.getStepACHR().getValue()) {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferNull, sendingDataBufferNull.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                } else {
-                    DatagramPacket outputPacketTen = new DatagramPacket(
-                            sendingDataBufferOne, sendingDataBufferOne.length,
-                            senderAddress, senderPortTen);
-                    udp.send(outputPacketTen);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            freqA.setValue((float) frequencyA);
-            freqB.setValue((float) frequencyB);
-            freqC.setValue((float) frequencyC);
-
+            udpBinder.process();
+            achr1.process();
+            achr2.process();
+            achr3.process();
+            achr4.process();
+            achr5.process();
+            achr6.process();
+            achr7.process();
+            achr8.process();
+            achr9.process();
+            achr10.process();
+            achr11.process();
+            achr12.process();
+            achr13.process();
+            chapv1.process();
+            chapv2.process();
+            chapv3.process();
+            chapv4.process();
+            chapv5.process();
+            chapv6.process();
+            chapv7.process();
+            chapv8.process();
+            chapv9.process();
+            chapv10.process();
+            chapv11.process();
+            chapv12.process();
+            chapv13.process();
+            udpBinder.sending();
             nhmi.process();
 
         }
