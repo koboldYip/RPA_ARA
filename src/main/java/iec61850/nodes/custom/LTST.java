@@ -147,9 +147,6 @@ public class LTST extends LN {
     }
 
     public boolean hasNext() {
-        if (counter < size) {
-            return true;
-        }
-        return false;
+        return counter < size;
     }
 }

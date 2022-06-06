@@ -3,7 +3,6 @@ package process;
 import iec61850.nodes.algo.ACHR;
 import iec61850.nodes.algo.CHAPV;
 import iec61850.nodes.custom.LTST;
-import iec61850.nodes.custom.UDPBinder;
 import iec61850.nodes.gui.NHMI;
 import iec61850.nodes.gui.NHMISignal;
 
@@ -284,7 +283,6 @@ public class Main {
         );
 
 
-
 //        while (iteration < (modellingTime * frequency * samplingFrequency - 1)) {
 //            udpBinder.process();
 
@@ -325,6 +323,8 @@ public class Main {
         while (ltst.hasNext()) {
             ltst.process();
 
+            nhmi.process();
+
             achr1.process();
             achr2.process();
             achr3.process();
@@ -353,7 +353,6 @@ public class Main {
             chapv12.process();
             chapv13.process();
 
-            nhmi.process();
 
         }
     }
