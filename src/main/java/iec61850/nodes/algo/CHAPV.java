@@ -18,11 +18,11 @@ public class CHAPV extends LN {
     private Attribute<Boolean> stepCHAPV = new Attribute<>(false);
     private Attribute<Boolean> stepACHR = new Attribute<>(false);
 
-    private Attribute<Float> timeSetPointCHAPV = new Attribute<>(10f);
+    private Attribute<Float> timeSetPointCHAPV = new Attribute<>(0.03f);
 
-    private Attribute<Float> frequencySetPointCHAPV = new Attribute<>(49.5f);
+    private Attribute<Float> frequencySetPointCHAPV = new Attribute<>(49f);
 
-    private double samplingFrequency = 200;
+    private double samplingFrequency = 80;
 
     public void process() {
 

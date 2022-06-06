@@ -104,6 +104,10 @@ public class Main {
 //        achr12.setFrequencyB(udpBinder.getFreqB());
 //        achr12.setFrequencyC(udpBinder.getFreqC());
 
+//        achr13.setFrequencyA(udpBinder.getFreqA());
+//        achr13.setFrequencyB(udpBinder.getFreqB());
+//        achr13.setFrequencyC(udpBinder.getFreqC());
+
 
         achr1.setFrequencyA(ltst.getFreqA());
         achr1.setFrequencyB(ltst.getFreqB());
@@ -153,6 +157,62 @@ public class Main {
         achr12.setFrequencyB(ltst.getFreqB());
         achr12.setFrequencyC(ltst.getFreqC());
 
+        achr13.setFrequencyA(ltst.getFreqA());
+        achr13.setFrequencyB(ltst.getFreqB());
+        achr13.setFrequencyC(ltst.getFreqC());
+
+        chapv1.setFrequencyA(ltst.getFreqA());
+        chapv1.setFrequencyB(ltst.getFreqB());
+        chapv1.setFrequencyC(ltst.getFreqC());
+
+        chapv2.setFrequencyA(ltst.getFreqA());
+        chapv2.setFrequencyB(ltst.getFreqB());
+        chapv2.setFrequencyC(ltst.getFreqC());
+
+        chapv3.setFrequencyA(ltst.getFreqA());
+        chapv3.setFrequencyB(ltst.getFreqB());
+        chapv3.setFrequencyC(ltst.getFreqC());
+
+        chapv4.setFrequencyA(ltst.getFreqA());
+        chapv4.setFrequencyB(ltst.getFreqB());
+        chapv4.setFrequencyC(ltst.getFreqC());
+
+        chapv5.setFrequencyA(ltst.getFreqA());
+        chapv5.setFrequencyB(ltst.getFreqB());
+        chapv5.setFrequencyC(ltst.getFreqC());
+
+        chapv6.setFrequencyA(ltst.getFreqA());
+        chapv6.setFrequencyB(ltst.getFreqB());
+        chapv6.setFrequencyC(ltst.getFreqC());
+
+        chapv7.setFrequencyA(ltst.getFreqA());
+        chapv7.setFrequencyB(ltst.getFreqB());
+        chapv7.setFrequencyC(ltst.getFreqC());
+
+        chapv8.setFrequencyA(ltst.getFreqA());
+        chapv8.setFrequencyB(ltst.getFreqB());
+        chapv8.setFrequencyC(ltst.getFreqC());
+
+        chapv9.setFrequencyA(ltst.getFreqA());
+        chapv9.setFrequencyB(ltst.getFreqB());
+        chapv9.setFrequencyC(ltst.getFreqC());
+
+        chapv10.setFrequencyA(ltst.getFreqA());
+        chapv10.setFrequencyB(ltst.getFreqB());
+        chapv10.setFrequencyC(ltst.getFreqC());
+
+        chapv11.setFrequencyA(ltst.getFreqA());
+        chapv11.setFrequencyB(ltst.getFreqB());
+        chapv11.setFrequencyC(ltst.getFreqC());
+
+        chapv12.setFrequencyA(ltst.getFreqA());
+        chapv12.setFrequencyB(ltst.getFreqB());
+        chapv12.setFrequencyC(ltst.getFreqC());
+
+        chapv13.setFrequencyA(ltst.getFreqA());
+        chapv13.setFrequencyB(ltst.getFreqB());
+        chapv13.setFrequencyC(ltst.getFreqC());
+
         achr1.setStepCHAPV(chapv1.getStepCHAPV());
         chapv1.setStepACHR(achr1.getStepACHR());
 
@@ -189,6 +249,9 @@ public class Main {
         achr12.setStepCHAPV(chapv12.getStepCHAPV());
         chapv12.setStepACHR(achr12.getStepACHR());
 
+        achr13.setStepCHAPV(chapv13.getStepCHAPV());
+        chapv13.setStepACHR(achr13.getStepACHR());
+
 //        udpBinder.getAchrs().add(achr1);
 //        udpBinder.getAchrs().add(achr2);
 //        udpBinder.getAchrs().add(achr3);
@@ -201,6 +264,7 @@ public class Main {
 //        udpBinder.getAchrs().add(achr10);
 //        udpBinder.getAchrs().add(achr11);
 //        udpBinder.getAchrs().add(achr12);
+//        udpBinder.getAchrs().add(achr13);
 
         achr1.getFrequencySetPointACHR().setValue(48.5f);
         achr2.getFrequencySetPointACHR().setValue(48.25f);
