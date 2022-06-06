@@ -20,7 +20,6 @@ public class UDPBinder extends LN {
 
     private DatagramSocket udp;
 
-
     private Attribute<Float> freqA = new Attribute<>(0f);
     private Attribute<Float> freqB = new Attribute<>(0f);
     private Attribute<Float> freqC = new Attribute<>(0f);
@@ -41,17 +40,15 @@ public class UDPBinder extends LN {
     private byte[] sendingDataBufferNull = {0, 0, 0, 0, 0, 0, 0, 0};
 
     private byte[] buffer = new byte[72];
-
-    private ByteBuffer received = ByteBuffer.allocate(72);
-    private ByteBuffer phsUa = ByteBuffer.allocate(8);
-    private ByteBuffer phsUb = ByteBuffer.allocate(8);
-    private ByteBuffer phsUc = ByteBuffer.allocate(8);
-    private ByteBuffer phsIa = ByteBuffer.allocate(8);
-    private ByteBuffer phsIb = ByteBuffer.allocate(8);
-    private ByteBuffer phsIc = ByteBuffer.allocate(8);
-    private ByteBuffer phsUab = ByteBuffer.allocate(8);
-    private ByteBuffer phsUac = ByteBuffer.allocate(8);
-    private ByteBuffer phsUbc = ByteBuffer.allocate(8);
+    private byte[] phsUa = new byte[8];
+    private byte[] phsUb = new byte[8];
+    private byte[] phsUc = new byte[8];
+    private byte[] phsIa = new byte[8];
+    private byte[] phsIb = new byte[8];
+    private byte[] phsIc = new byte[8];
+    private byte[] phsUab = new byte[8];
+    private byte[] phsUac = new byte[8];
+    private byte[] phsUbc = new byte[8];
 
     private DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
 
@@ -71,16 +68,16 @@ public class UDPBinder extends LN {
     private int flagB;
     private int flagC;
 
-    private Attribute<Double> lastValueA = new Attribute<>(0d);
-    private Attribute<Double> lastValueB = new Attribute<>(0d);
-    private Attribute<Double> lastValueC = new Attribute<>(0d);
+    private double lastValueA;
+    private double lastValueB;
+    private double lastValueC;
 
 
     public int frequency = 50;
 
     public int samplingFrequency = 80;
 
-    private Attribute<Float> frequencyThreePhase = new Attribute<>(0f);
+    private float frequencyThreePhase;
 
     private int point;
 
@@ -96,55 +93,56 @@ public class UDPBinder extends LN {
         udp.receive(packet);
         senderAddress = packet.getAddress();
 
-        received = ByteBuffer.wrap(buffer);
+        for (int i = 0; i < (buffer.length) / 9; i++) {
+            phsUa[8 - i - 1] = buffer[i];
+            phsUb[8 - i - 1] = buffer[i + 8];
+            phsUc[8 - i - 1] = buffer[i + 16];
+            phsIa[8 - i - 1] = buffer[i + 24];
+            phsIb[8 - i - 1] = buffer[i + 32];
+            phsIc[8 - i - 1] = buffer[i + 40];
+            phsUab[8 - i - 1] = buffer[i + 48];
+            phsUac[8 - i - 1] = buffer[i + 56];
+            phsUbc[8 - i - 1] = buffer[i + 64];
+        }
 
-        phsUa = (ByteBuffer) phsUa.put(received.array(), 0, 8).rewind();
-        phsUb = (ByteBuffer) phsUb.put(received.array(), 8, 8).rewind();
-        phsUc = (ByteBuffer) phsUc.put(received.array(), 16, 8).rewind();
-        phsIa = (ByteBuffer) phsIa.put(received.array(), 24, 8).rewind();
-        phsIb = (ByteBuffer) phsIb.put(received.array(), 32, 8).rewind();
-        phsIc = (ByteBuffer) phsIc.put(received.array(), 40, 8).rewind();
-        phsUab = (ByteBuffer) phsUab.put(received.array(), 48, 8).rewind();
-        phsUac = (ByteBuffer) phsUac.put(received.array(), 56, 8).rewind();
-        phsUbc = (ByteBuffer) phsUbc.put(received.array(), 64, 8).rewind();
+        /*Преобразуем закодированный массив из байт в число*/
+        Ua = ByteBuffer.wrap(phsUa).getDouble();
+        Ub = ByteBuffer.wrap(phsUb).getDouble();
+        Uc = ByteBuffer.wrap(phsUc).getDouble();
+        Ia = ByteBuffer.wrap(phsIa).getDouble();
+        Ib = ByteBuffer.wrap(phsIb).getDouble();
+        Ic = ByteBuffer.wrap(phsIc).getDouble();
+        Uab = ByteBuffer.wrap(phsUab).getDouble();
+        Uac = ByteBuffer.wrap(phsUac).getDouble();
+        Ubc = ByteBuffer.wrap(phsUbc).getDouble();
 
-        Ua = phsUa.getDouble();
-        Ub = phsUb.getDouble();
-        Uc = phsUc.getDouble();
-        Ia = phsIa.getDouble();
-        Ib = phsIb.getDouble();
-        Ic = phsIc.getDouble();
-        Uab = phsUab.getDouble();
-        Uac = phsUac.getDouble();
-        Ubc = phsUbc.getDouble();
-
-        if ((lastValueA.getValue() * Ua) < 0) {
+        if ((lastValueA * Ua) < 0) {
             if (flagA != 2) {
                 periodA += halfPeriodA;
                 halfPeriodA = 0;
                 flagA += 1;
             }
             if (flagA == 2) {
-                freqA.setValue((float) (periodA / samplingFrequency * 50));
+                freqA.setValue((float) periodA / samplingFrequency * 50);
                 periodA = 0;
                 flagA = 0;
             }
         }
         /*Фаза В*/
-        if ((lastValueB.getValue() * Ub) < 0) {
+        if ((lastValueB * Ub) < 0) {
             if (flagB != 2) {
                 periodB += halfPeriodB;
                 halfPeriodB = 0;
                 flagB += 1;
             }
             if (flagB == 2) {
-                freqB.setValue((float) (periodB / samplingFrequency * 50));
+                freqB.setValue((float) periodB / samplingFrequency * 50);
                 periodB = 0;
                 flagB = 0;
             }
         }
         /*Фаза С*/
-        if ((lastValueC.getValue() * Uc) < 0) {
+        if ((lastValueC * Uc) < 0) {
             if (flagC != 2) {
                 periodC += halfPeriodC;
                 halfPeriodC = 0;
@@ -157,11 +155,12 @@ public class UDPBinder extends LN {
             }
         }
 
-        frequencyThreePhase.setValue((freqA.getValue() + freqB.getValue() + freqC.getValue()) / 3);
+        frequencyThreePhase = (freqA.getValue() + freqB.getValue() + freqC.getValue()) / 3;
+        System.out.println("Frequency - " + frequencyThreePhase);
 
-        lastValueA.setValue(Ua);
-        lastValueB.setValue(Ub);
-        lastValueC.setValue(Uc);
+        lastValueA = Ua;
+        lastValueB = Ub;
+        lastValueC = Uc;
 
         halfPeriodA++;
         halfPeriodB++;
