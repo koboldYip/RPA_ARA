@@ -98,7 +98,7 @@ public class LTST extends LN {
                 flagC += 1;
             }
             if (flagC == 2) {
-                freqC.setValue((float) periodC / samplingFrequency * 50);
+                freqC.setValue((float) (periodC / samplingFrequency * 50));
                 periodC = 0;
                 flagC = 0;
             }

@@ -20,7 +20,7 @@ public class CHAPV extends LN {
 
     private Attribute<Float> timeSetPointCHAPV = new Attribute<>(10f);
 
-    private Attribute<Float> frequencySetPointCHAPV = new Attribute<>(0f);
+    private Attribute<Float> frequencySetPointCHAPV = new Attribute<>(49.5f);
 
     private double samplingFrequency = 200;
 

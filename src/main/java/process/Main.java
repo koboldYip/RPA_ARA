@@ -317,6 +317,8 @@ public class Main {
 //            udpBinder.sending();
 
 //            nhmi.process();
+//            nhmi1.process();
+//            nhmi2.process();
 //
 //        }
 
@@ -324,6 +326,8 @@ public class Main {
             ltst.process();
 
             nhmi.process();
+            nhmi1.process();
+            nhmi2.process();
 
             achr1.process();
             achr2.process();
@@ -352,8 +356,6 @@ public class Main {
             chapv11.process();
             chapv12.process();
             chapv13.process();
-
-
         }
     }
 }
