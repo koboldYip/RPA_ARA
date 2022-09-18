@@ -4,8 +4,6 @@ import iec61850.nodes.common.LN;
 import iec61850.objects.samples.Attribute;
 import lombok.Data;
 
-import java.net.DatagramPacket;
-
 @Data
 public class ACHR extends LN {
 
@@ -37,27 +35,13 @@ public class ACHR extends LN {
 
     public void process() {
 
-        if (frequencyA.getValue() <= frequencySetPointACHR.getValue()) {
-            timeA_ACHR++;
-        } else {
-            timeA_ACHR = 0;
-        }
-        if (frequencyB.getValue() <= frequencySetPointACHR.getValue()) {
-            timeB_ACHR++;
-        } else {
-            timeB_ACHR = 0;
-        }
-        if (frequencyC.getValue() <= frequencySetPointACHR.getValue()) {
-            timeC_ACHR++;
-        } else {
-            timeC_ACHR = 0;
-        }
+        timeA_ACHR = frequencyA.getValue() <= frequencySetPointACHR.getValue() ? timeA_ACHR + 1 : 0;
+        timeB_ACHR = frequencyB.getValue() <= frequencySetPointACHR.getValue() ? timeB_ACHR + 1 : 0;
+        timeC_ACHR = frequencyC.getValue() <= frequencySetPointACHR.getValue() ? timeC_ACHR + 1 : 0;
 
-        if ((timeA_ACHR > timeSetPointACHR.getValue() * 50 * samplingFrequency.getValue()) ||
+        stepACHR.setValue((timeA_ACHR > timeSetPointACHR.getValue() * 50 * samplingFrequency.getValue()) ||
                 (timeB_ACHR > timeSetPointACHR.getValue() * 50 * samplingFrequency.getValue()) ||
-                (timeC_ACHR > timeSetPointACHR.getValue() * 50 * samplingFrequency.getValue())) {
-            stepACHR.setValue(true);
-        }
+                (timeC_ACHR > timeSetPointACHR.getValue() * 50 * samplingFrequency.getValue()));
 
         if ((samplingFrequency.getValue() * 50) == 1.0) {
             if ((Math.abs((lastFrequencyA.getValue() - frequencyA.getValue())) >= 1) ||
@@ -72,7 +56,6 @@ public class ACHR extends LN {
         }
 
         if (stepCHAPV.getValue()) stepACHR.setValue(false);
-
 
         time_ACHR++;
     }

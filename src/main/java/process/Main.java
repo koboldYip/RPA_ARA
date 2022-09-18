@@ -9,20 +9,11 @@ import iec61850.nodes.gui.NHMISignal;
 
 public class Main {
 
-
-    public static int modellingTime = 30;
-
-    public static int frequency = 50;
-
-    public static int samplingFrequency = 80;
-
-    public static int iteration = 0;
-
     public static void main(String[] args) {
 
 //        UDPBinder udpBinder = new UDPBinder();
 
-        LTST ltst = new LTST();
+        LTST ltst = new LTST(0);
 
         ACHR achr1 = new ACHR();
         ACHR achr2 = new ACHR();
@@ -335,9 +326,28 @@ public class Main {
         );
 
         nhmi1.addSignals(
-                new NHMISignal("achr1", achr1.getStepACHR()),
-                new NHMISignal("achr2", achr2.getStepACHR()),
+                new NHMISignal("achr1", achr1.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr2", achr2.getStepACHR())
+        );
+        nhmi1.addSignals(
                 new NHMISignal("achr3", achr3.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr4", achr4.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr5", achr5.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr6", achr6.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr7", achr7.getStepACHR())
+        );
+        nhmi1.addSignals(
+                new NHMISignal("achr8", achr8.getStepACHR())
         );
 
         nhmi2.addSignals(
