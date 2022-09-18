@@ -73,7 +73,7 @@ public class UDPBinder extends LN {
     private double lastValueC;
 
 
-    public int frequency = 50;
+    public int frequency = 150;
 
     public int samplingFrequency = 80;
 
