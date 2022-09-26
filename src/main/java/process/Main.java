@@ -10,9 +10,9 @@ import iec61850.nodes.gui.NHMISignal;
 
 public class Main {
 
-    public static int modellingTime = 30;
+    public static int modellingTime = 120;
 
-    public static int frequency = 150;
+    public static int frequency = 50;
 
     public static int samplingFrequency = 80;
 
@@ -23,7 +23,7 @@ public class Main {
 
         UDPBinder udpBinder = new UDPBinder();
 
-        LTST ltst = new LTST(0);
+//        LTST ltst = new LTST(0);
 
         ACHR achr1 = new ACHR();
         ACHR achr2 = new ACHR();
@@ -267,7 +267,7 @@ public class Main {
         udpBinder.getAchrs().add(achr12);
         udpBinder.getAchrs().add(achr13);
 
-        achr1.getFrequencySetPointACHR().setValue(150f);
+        achr1.getFrequencySetPointACHR().setValue(48.5f);
         achr2.getFrequencySetPointACHR().setValue(48.25f);
         achr3.getFrequencySetPointACHR().setValue(48f);
         achr4.getFrequencySetPointACHR().setValue(47.75f);
@@ -292,8 +292,8 @@ public class Main {
         achr9.getTimeSetPointACHR().setValue(0.2f);
         achr10.getTimeSetPointACHR().setValue(0.2f);
         achr11.getTimeSetPointACHR().setValue(0.2f);
-        achr12.getTimeSetPointACHR().setValue(16f);
-        achr13.getTimeSetPointACHR().setValue(28f);
+        achr12.getTimeSetPointACHR().setValue(1.6f);
+        achr13.getTimeSetPointACHR().setValue(2.8f);
 
         achr1.getSamplingFrequency().setValue(80f);
         achr2.getSamplingFrequency().setValue(80f);
