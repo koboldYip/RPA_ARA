@@ -29,6 +29,7 @@ public class UDPBinder extends LN {
     private byte[] sendingDataBufferNull = {0, 0, 0, 0, 0, 0, 0, 0};
 
     private byte[] buffer = new byte[24];
+
     private byte[] freqBufA = new byte[8];
     private byte[] freqBufB = new byte[8];
     private byte[] freqBufC = new byte[8];

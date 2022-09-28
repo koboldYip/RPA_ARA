@@ -25,7 +25,6 @@ public class LTST extends LN {
     private Attribute<Float> massivA = new Attribute<>(0f);
     private Attribute<Float> massivB = new Attribute<>(0f);
     private Attribute<Float> massivC = new Attribute<>(0f);
-    private int window = 5;
     private Attribute<Float> freqA = new Attribute<>(0f);
     private Attribute<Float> freqB = new Attribute<>(0f);
     private Attribute<Float> freqC = new Attribute<>(0f);
